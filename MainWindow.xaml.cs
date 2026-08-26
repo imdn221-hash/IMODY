@@ -1,15 +1,15 @@
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 
 namespace IMODY
 {
     public partial class MainWindow : Window
     {
+        private string activeVideoName = "ody_video_1.mp4";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -19,90 +19,56 @@ namespace IMODY
         {
             ThemeManager.ApplyTheme(UserSession.CurrentTheme);
             SetTimeBasedGreeting();
-            Setup3DGlobe();
+            PlayOdyVideo("ody_video_1.mp4");
         }
 
         // =========================================================
-        // 3D DÜNYA KÜRESİ (GLOBE)
+        // CANLI ODY VİDEO PORTALI (MEDIAELEMENT LOOP)
         // =========================================================
-        private void Setup3DGlobe()
+        private void PlayOdyVideo(string fileName)
         {
             try
             {
-                var mesh = CreateSphereMesh(1.0, 36, 36);
-                GlobeGeometryModel.Geometry = mesh;
-
-                string earthPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "earth.jpeg");
-                ImageSource imageSource;
-
-                if (File.Exists(earthPath))
+                activeVideoName = fileName;
+                string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
+                
+                if (File.Exists(videoPath))
                 {
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(earthPath, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.EndInit();
-                    imageSource = bmp;
+                    OdyVideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
+                    OdyVideoPlayer.IsMuted = true;
+                    OdyVideoPlayer.Volume = 0;
+                    OdyVideoPlayer.Play();
                 }
-                else
-                {
-                    imageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/earth.jpeg"));
-                }
-
-                GlobeGeometryModel.Material = new DiffuseMaterial(new ImageBrush(imageSource));
-
-                var rotationAnim = new DoubleAnimation
-                {
-                    From = 0,
-                    To = 360,
-                    Duration = TimeSpan.FromSeconds(25),
-                    RepeatBehavior = RepeatBehavior.Forever
-                };
-                GlobeRotation.BeginAnimation(AxisAngleRotation3D.AngleProperty, rotationAnim);
             }
             catch { }
         }
 
-        private MeshGeometry3D CreateSphereMesh(double radius, int slices, int stacks)
+        private void OdyVideoPlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-            var mesh = new MeshGeometry3D();
-
-            for (int stack = 0; stack <= stacks; stack++)
+            try
             {
-                double phi = Math.PI * stack / stacks;
-                double y = radius * Math.Cos(phi);
-                double ringRadius = radius * Math.Sin(phi);
-
-                for (int slice = 0; slice <= slices; slice++)
-                {
-                    double theta = 2.0 * Math.PI * slice / slices;
-                    double x = ringRadius * Math.Sin(theta);
-                    double z = ringRadius * Math.Cos(theta);
-
-                    mesh.Positions.Add(new Point3D(x, y, z));
-                    mesh.Normals.Add(new Vector3D(x / radius, y / radius, z / radius));
-                    mesh.TextureCoordinates.Add(new Point((double)slice / slices, (double)stack / stacks));
-                }
+                OdyVideoPlayer.Position = TimeSpan.Zero;
+                OdyVideoPlayer.Play();
             }
+            catch { }
+        }
 
-            for (int stack = 0; stack < stacks; stack++)
-            {
-                for (int slice = 0; slice < slices; slice++)
-                {
-                    int first = (stack * (slices + 1)) + slice;
-                    int second = first + slices + 1;
+        private void BtnVideo1_Click(object sender, RoutedEventArgs e)
+        {
+            PlayOdyVideo("ody_video_1.mp4");
+            BtnVideo1.Background = (Brush)Application.Current.Resources["Theme_Accent"];
+            BtnVideo1.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));
+            BtnVideo2.Background = (Brush)Application.Current.Resources["Theme_BgSub"];
+            BtnVideo2.Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"];
+        }
 
-                    mesh.TriangleIndices.Add(first);
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(first + 1);
-
-                    mesh.TriangleIndices.Add(second);
-                    mesh.TriangleIndices.Add(second + 1);
-                    mesh.TriangleIndices.Add(first + 1);
-                }
-            }
-
-            return mesh;
+        private void BtnVideo2_Click(object sender, RoutedEventArgs e)
+        {
+            PlayOdyVideo("ody_video_2.mp4");
+            BtnVideo2.Background = (Brush)Application.Current.Resources["Theme_Accent"];
+            BtnVideo2.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));
+            BtnVideo1.Background = (Brush)Application.Current.Resources["Theme_BgSub"];
+            BtnVideo1.Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"];
         }
 
         private void SetTimeBasedGreeting()
