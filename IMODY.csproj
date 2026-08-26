@@ -1,11 +1,95 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+		<UserSecretsId>imody-user-secrets-8d2fa4fd-ddf5-4420</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+
+		<Content Include="Assets\Models\earth (2).glb">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.GenAI" Version="1.16.0" />
+		<PackageReference Include="HelixToolkit.Wpf" Version="3.1.2" />
+		<PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="3.1.2" />
+		<PackageReference Include="HelixToolkit.SharpDX.Assimp" Version="3.1.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\earth.jpeg">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\ody_mascot.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\ody_mascot_swim.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\ody_mascot_portrait.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+
+		<None Update="Resources\golden_water.mp4">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\golden_water.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\beach_water.mp4">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\ocean_turtle.mp4">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\breakfast_*.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\afternoon_*.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\evening_*.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\dinner_*.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\food_*.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\photo_tips.jpg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\water_flowers.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\ody_mascot_*.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\ody_layer_*.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+
+		<Resource Include="Fonts\MeaCulpa-Regular.ttf" />
+	</ItemGroup>
 
 </Project>

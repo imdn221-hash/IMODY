@@ -1,9 +1,16 @@
-﻿<Application x:Class="IMODY.App"
+<Application x:Class="IMODY.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:IMODY"
-             StartupUri="MainWindow.xaml">
+            StartupUri="LoginWindow.xaml">
     <Application.Resources>
-         
+        <!-- DİNAMİK TEMA FIRÇALARI (VİŞNE ÇÜRÜĞÜ / KOYU SİYAH / BEYAZ AÇIK) -->
+        <SolidColorBrush x:Key="Theme_BgPrimary" Color="#2B0717"/>
+        <SolidColorBrush x:Key="Theme_BgCard" Color="#3B0C1E"/>
+        <SolidColorBrush x:Key="Theme_BgSub" Color="#4A1026"/>
+        <SolidColorBrush x:Key="Theme_Border" Color="#7D4053"/>
+        <SolidColorBrush x:Key="Theme_Accent" Color="#D6A45A"/>
+        <SolidColorBrush x:Key="Theme_TextPrimary" Color="#F5E9DD"/>
+        <SolidColorBrush x:Key="Theme_TextSecondary" Color="#D9A6A8"/>
     </Application.Resources>
 </Application>
