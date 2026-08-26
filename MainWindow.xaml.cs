@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -21,8 +20,6 @@ namespace IMODY
             ThemeManager.ApplyTheme(UserSession.CurrentTheme);
             SetTimeBasedGreeting();
             Setup3DGlobe();
-            LoadPuppetImages();
-            StartOdyPuppetAnimation();
         }
 
         // =========================================================
@@ -106,162 +103,6 @@ namespace IMODY
             }
 
             return mesh;
-        }
-
-        // =========================================================
-        // KATMANLI ODY KUKLA İSKELET ANİMASYONU
-        // =========================================================
-        private void LoadPuppetImages()
-        {
-            LoadLayerImage(OdyTailImage, "ody_layer_tail.png");
-            LoadLayerImage(OdyTorsoImage, "ody_layer_head_torso.png");
-            LoadLayerImage(OdyArmImage, "ody_layer_compass_arm.png");
-        }
-
-        private void LoadLayerImage(System.Windows.Controls.Image imgElement, string fileName)
-        {
-            try
-            {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
-                if (File.Exists(path))
-                {
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(path, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.EndInit();
-                    imgElement.Source = bmp;
-                }
-                else
-                {
-                    imgElement.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/{fileName}"));
-                }
-            }
-            catch { }
-        }
-
-        private void StartOdyPuppetAnimation()
-        {
-            try
-            {
-                // 1. Kuyruk Yüzme Salınımı (Undulating Tail Wave)
-                var tailAnim = new DoubleAnimation
-                {
-                    From = -14,
-                    To = 14,
-                    Duration = TimeSpan.FromSeconds(2.2),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyTailRotate.BeginAnimation(RotateTransform.AngleProperty, tailAnim);
-
-                // 2. Kol ve Pusula Sallama (Arm & Compass Sway)
-                var armAnim = new DoubleAnimation
-                {
-                    From = -6,
-                    To = 18,
-                    Duration = TimeSpan.FromSeconds(2.8),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyArmRotate.BeginAnimation(RotateTransform.AngleProperty, armAnim);
-
-                // 3. Gövde & Kafa Salınımı (Torso & Head Natural Sway)
-                var torsoAnim = new DoubleAnimation
-                {
-                    From = -3.5,
-                    To = 3.5,
-                    Duration = TimeSpan.FromSeconds(3.4),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyTorsoRotate.BeginAnimation(RotateTransform.AngleProperty, torsoAnim);
-
-                // 4. Nefes Alma & Göğüs Hareketi (Breathing Scale)
-                var breatheAnim = new DoubleAnimation
-                {
-                    From = 0.985,
-                    To = 1.015,
-                    Duration = TimeSpan.FromSeconds(2.5),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyTorsoScale.BeginAnimation(ScaleTransform.ScaleXProperty, breatheAnim);
-                OdyTorsoScale.BeginAnimation(ScaleTransform.ScaleYProperty, breatheAnim);
-
-                // 5. Genel Sualtı Süzülmesi (Vertical Floating Float)
-                var floatAnim = new DoubleAnimation
-                {
-                    From = -10,
-                    To = 10,
-                    Duration = TimeSpan.FromSeconds(3.8),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyFloatTranslate.BeginAnimation(TranslateTransform.YProperty, floatAnim);
-            }
-            catch { }
-        }
-
-        // =========================================================
-        // İNTERAKTİF FARE TEPKİLERİ
-        // =========================================================
-        private void Ody_MouseEnter(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var zoom = new DoubleAnimation(1.06, TimeSpan.FromMilliseconds(220))
-                {
-                    EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.4 }
-                };
-                OdyMasterScale.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
-                OdyMasterScale.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
-
-                var fadeIn = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200));
-                OdySpeechBubble.BeginAnimation(OpacityProperty, fadeIn);
-            }
-            catch { }
-        }
-
-        private void Ody_MouseLeave(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var zoomOut = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(300))
-                {
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                };
-                OdyMasterScale.BeginAnimation(ScaleTransform.ScaleXProperty, zoomOut);
-                OdyMasterScale.BeginAnimation(ScaleTransform.ScaleYProperty, zoomOut);
-
-                var fadeOut = new DoubleAnimation(0, TimeSpan.FromMilliseconds(300));
-                OdySpeechBubble.BeginAnimation(OpacityProperty, fadeOut);
-            }
-            catch { }
-        }
-
-        private void Ody_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                var jump = new DoubleAnimation
-                {
-                    From = -10,
-                    To = -35,
-                    Duration = TimeSpan.FromMilliseconds(250),
-                    AutoReverse = true,
-                    EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.6 }
-                };
-                OdyFloatTranslate.BeginAnimation(TranslateTransform.YProperty, jump);
-
-                OdySpeechText.Text = "Hadi keşfe başlayalım! 🌟";
-            }
-            catch { }
         }
 
         private void SetTimeBasedGreeting()

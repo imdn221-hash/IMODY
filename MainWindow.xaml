@@ -152,16 +152,16 @@
         <!-- ANA İÇERİK -->
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              Margin="0,15,0,0">
+              Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="480"/>
-                <ColumnDefinition Width="540"/>
+                <ColumnDefinition Width="520"/>
+                <ColumnDefinition Width="420"/>
             </Grid.ColumnDefinitions>
 
             <!-- SOL TARAF (METİNLER VE AKSİYON) -->
             <StackPanel Grid.Column="0"
                         VerticalAlignment="Center"
-                        Margin="0,0,25,0">
+                        Margin="0,0,30,0">
                 <!-- Dinamik Karşılama Rozeti -->
                 <Border Background="{DynamicResource Theme_BgSub}" CornerRadius="12" Padding="12,5" HorizontalAlignment="Left" Margin="0,0,0,18">
                     <StackPanel Orientation="Horizontal">
@@ -216,29 +216,26 @@
                 </Border>
             </StackPanel>
 
-            <!-- SAĞ TARAF / 3D DÖNEN DÜNYA KÜRESİ VE CANLI HAREKET EDEN ODY -->
-            <Grid Grid.Column="1" Width="540" Height="420" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- SAĞ TARAF / 3D DÖNEN DÜNYA KÜRESİ (GLOBE) VE KOZMİK PARILTI -->
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- Arka Plan Kozmik Parıltı & Atmosferik Halka -->
-                <Ellipse Width="330" Height="330" Stroke="{DynamicResource Theme_Accent}" StrokeThickness="1.5" Opacity="0.25">
+                <Ellipse Width="340" Height="340" Stroke="{DynamicResource Theme_Accent}" StrokeThickness="1.5" Opacity="0.3">
                     <Ellipse.Effect><BlurEffect Radius="24"/></Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="270" Height="270" Stroke="#48CAE4" StrokeThickness="1" Opacity="0.2">
+                <Ellipse Width="290" Height="290" Stroke="#48CAE4" StrokeThickness="1" Opacity="0.25">
                     <Ellipse.Effect><BlurEffect Radius="14"/></Ellipse.Effect>
                 </Ellipse>
 
                 <!-- 3D DÜNYA KÜRESİ (VIEWPORT3D) -->
-                <Border Width="240"
-                        Height="240"
-                        CornerRadius="120"
+                <Border Width="280"
+                        Height="280"
+                        CornerRadius="140"
                         Background="{DynamicResource Theme_BgCard}"
                         BorderBrush="{DynamicResource Theme_Border}"
-                        BorderThickness="1.5"
-                        ClipToBounds="True"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Margin="15,0,0,0">
+                        BorderThickness="2"
+                        ClipToBounds="True">
                     <Border.Effect>
-                        <DropShadowEffect Color="#000000" BlurRadius="30" ShadowDepth="8" Opacity="0.45"/>
+                        <DropShadowEffect Color="#000000" BlurRadius="35" ShadowDepth="10" Opacity="0.5"/>
                     </Border.Effect>
                     
                     <Viewport3D x:Name="GlobeViewport">
@@ -265,78 +262,6 @@
                         </ModelVisual3D>
                     </Viewport3D>
                 </Border>
-
-                <!-- ODY CANLI İSKELET / KATMAN KUKLA ANİMASYONU -->
-                <Grid x:Name="OdyPuppetContainer"
-                      Width="320"
-                      Height="340"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Center"
-                      Margin="0,0,0,0"
-                      Cursor="Hand"
-                      MouseEnter="Ody_MouseEnter"
-                      MouseLeave="Ody_MouseLeave"
-                      MouseLeftButtonDown="Ody_MouseLeftButtonDown">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <TranslateTransform x:Name="OdyFloatTranslate" X="0" Y="0"/>
-                            <ScaleTransform x:Name="OdyMasterScale" ScaleX="1" ScaleY="1" CenterX="160" CenterY="170"/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-
-                    <!-- Katman 1: Kuyruk & Yüzgeç (Dalgalanma Hareketi) -->
-                    <Image x:Name="OdyTailImage"
-                           Stretch="Uniform"
-                           RenderTransformOrigin="0.5, 0.58">
-                        <Image.RenderTransform>
-                            <RotateTransform x:Name="OdyTailRotate" Angle="0"/>
-                        </Image.RenderTransform>
-                    </Image>
-
-                    <!-- Katman 2: Gövde, Kafa & Saçlar (Nefes Alma & Salınım) -->
-                    <Image x:Name="OdyTorsoImage"
-                           Stretch="Uniform"
-                           RenderTransformOrigin="0.5, 0.60">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform x:Name="OdyTorsoRotate" Angle="0"/>
-                                <ScaleTransform x:Name="OdyTorsoScale" ScaleX="1" ScaleY="1"/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-
-                    <!-- Katman 3: Sağ Kol & Altın Pusula (El Sallama & Pusula Gösterisi) -->
-                    <Image x:Name="OdyArmImage"
-                           Stretch="Uniform"
-                           RenderTransformOrigin="0.60, 0.42">
-                        <Image.RenderTransform>
-                            <RotateTransform x:Name="OdyArmRotate" Angle="0"/>
-                        </Image.RenderTransform>
-                        <Image.Effect>
-                            <DropShadowEffect Color="#E5A93C" BlurRadius="18" ShadowDepth="0" Opacity="0.45"/>
-                        </Image.Effect>
-                    </Image>
-
-                    <!-- Ody İnteraktif Konuşma Baloncuğu -->
-                    <Border x:Name="OdySpeechBubble"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Margin="0,10,10,0"
-                            Background="{DynamicResource Theme_BgSub}"
-                            BorderBrush="{DynamicResource Theme_Accent}"
-                            BorderThickness="1.2"
-                            CornerRadius="14"
-                            Padding="12,7"
-                            Opacity="0">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#000000" BlurRadius="12" Opacity="0.35"/>
-                        </Border.Effect>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="🧜‍♀️ " FontSize="13" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="OdySpeechText" Text="Sen nereye, ben oraya! ✨" FontSize="11.5" FontWeight="Bold" Foreground="{DynamicResource Theme_TextPrimary}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
             </Grid>
         </Grid>
 
