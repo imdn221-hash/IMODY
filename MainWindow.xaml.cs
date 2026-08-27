@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -11,8 +10,6 @@ namespace IMODY
 {
     public partial class MainWindow : Window
     {
-        private string currentPose = "ody_mascot_portrait.png";
-
         public MainWindow()
         {
             InitializeComponent();
@@ -23,8 +20,6 @@ namespace IMODY
             ThemeManager.ApplyTheme(UserSession.CurrentTheme);
             SetTimeBasedGreeting();
             Setup3DGlobe();
-            LoadOdyImage("ody_mascot_portrait.png");
-            StartOdyFloatingAnimation();
         }
 
         // =========================================================
@@ -108,151 +103,6 @@ namespace IMODY
             }
 
             return mesh;
-        }
-
-        // =========================================================
-        // ARKA PLANSIZ ŞEFFAF ODY PNG (SÜZÜLME & NEFES ALMA)
-        // =========================================================
-        private void LoadOdyImage(string fileName)
-        {
-            try
-            {
-                currentPose = fileName;
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
-                
-                if (File.Exists(path))
-                {
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(path, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.EndInit();
-                    OdyTransparentImage.Source = bmp;
-                }
-                else
-                {
-                    OdyTransparentImage.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/{fileName}"));
-                }
-            }
-            catch { }
-        }
-
-        private void StartOdyFloatingAnimation()
-        {
-            try
-            {
-                // Y ekseninde akıcı süzülme
-                var floatY = new DoubleAnimation
-                {
-                    From = -10,
-                    To = 10,
-                    Duration = TimeSpan.FromSeconds(3.2),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyTranslate.BeginAnimation(TranslateTransform.YProperty, floatY);
-
-                // Yüzerken hafif eğilme
-                var tilt = new DoubleAnimation
-                {
-                    From = -2.5,
-                    To = 2.5,
-                    Duration = TimeSpan.FromSeconds(3.8),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyRotate.BeginAnimation(RotateTransform.AngleProperty, tilt);
-
-                // Nefes alma ölçeklemesi
-                var breathe = new DoubleAnimation
-                {
-                    From = 0.985,
-                    To = 1.015,
-                    Duration = TimeSpan.FromSeconds(2.6),
-                    AutoReverse = true,
-                    RepeatBehavior = RepeatBehavior.Forever,
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
-                };
-                OdyScale.BeginAnimation(ScaleTransform.ScaleXProperty, breathe);
-                OdyScale.BeginAnimation(ScaleTransform.ScaleYProperty, breathe);
-            }
-            catch { }
-        }
-
-        private void BtnPosePortrait_Click(object sender, RoutedEventArgs e)
-        {
-            LoadOdyImage("ody_mascot_portrait.png");
-            BtnPosePortrait.Background = (Brush)Application.Current.Resources["Theme_Accent"];
-            BtnPosePortrait.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));
-            BtnPoseSwim.Background = (Brush)Application.Current.Resources["Theme_BgSub"];
-            BtnPoseSwim.Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"];
-        }
-
-        private void BtnPoseSwim_Click(object sender, RoutedEventArgs e)
-        {
-            LoadOdyImage("ody_mascot_swim.png");
-            BtnPoseSwim.Background = (Brush)Application.Current.Resources["Theme_Accent"];
-            BtnPoseSwim.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));
-            BtnPosePortrait.Background = (Brush)Application.Current.Resources["Theme_BgSub"];
-            BtnPosePortrait.Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"];
-        }
-
-        // =========================================================
-        // İNTERAKTİF FARE TEPKİLERİ
-        // =========================================================
-        private void Ody_MouseEnter(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var zoom = new DoubleAnimation(1.06, TimeSpan.FromMilliseconds(220))
-                {
-                    EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.4 }
-                };
-                OdyScale.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
-                OdyScale.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
-
-                var fadeIn = new DoubleAnimation(1, TimeSpan.FromMilliseconds(200));
-                OdySpeechBubble.BeginAnimation(OpacityProperty, fadeIn);
-            }
-            catch { }
-        }
-
-        private void Ody_MouseLeave(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var zoomOut = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(300))
-                {
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                };
-                OdyScale.BeginAnimation(ScaleTransform.ScaleXProperty, zoomOut);
-                OdyScale.BeginAnimation(ScaleTransform.ScaleYProperty, zoomOut);
-
-                var fadeOut = new DoubleAnimation(0, TimeSpan.FromMilliseconds(300));
-                OdySpeechBubble.BeginAnimation(OpacityProperty, fadeOut);
-            }
-            catch { }
-        }
-
-        private void Ody_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                var jump = new DoubleAnimation
-                {
-                    From = -10,
-                    To = -35,
-                    Duration = TimeSpan.FromMilliseconds(250),
-                    AutoReverse = true,
-                    EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.6 }
-                };
-                OdyTranslate.BeginAnimation(TranslateTransform.YProperty, jump);
-
-                OdySpeechText.Text = "Hadi yeni bir rota çizelim! 🚀";
-            }
-            catch { }
         }
 
         private void SetTimeBasedGreeting()
