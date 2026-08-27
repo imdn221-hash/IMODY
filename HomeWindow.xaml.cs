@@ -752,6 +752,12 @@ namespace IMODY
             Close();
         }
 
+        private void MyTripsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyTripsWindow myTrips = new MyTripsWindow { Owner = this };
+            myTrips.ShowDialog();
+        }
+
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileWindow profile = new ProfileWindow { Owner = this };

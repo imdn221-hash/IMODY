@@ -129,6 +129,12 @@ namespace IMODY
             Close();
         }
 
+        private void MyTripsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyTripsWindow myTrips = new MyTripsWindow { Owner = this };
+            myTrips.ShowDialog();
+        }
+
         private void ExploreButton_Click(object sender, RoutedEventArgs e)
         {
             ExploreWindow explore = new ExploreWindow { Owner = this };

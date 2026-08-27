@@ -115,6 +115,9 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Margin="0,37,45,0">
+            <Button Content="📖 Seyahatlerim"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="MyTripsButton_Click"/>
             <Button Content="Keşfet"
                     Style="{StaticResource NavButtonStyle}"
                     Click="ExploreButton_Click"/>
