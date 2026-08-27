@@ -649,21 +649,13 @@ Tam {totalDays} günlük plan hazırla.
             // Her gün için farklı estetik görselleri yükle
             int breakfastNum = (index % 5) + 1;
             int afternoonNum = (index % 5) + 1;
+            int dinnerNum = (index % 8) + 1;
 
             LoadImageSafe(MorningBreakfastImage, $"breakfast_{breakfastNum}.jpg");
             LoadImageSafe(AfternoonImage, $"afternoon_{afternoonNum}.jpg");
 
-            // Bölgeye göre Akşam Yemeği / Manzara Görseli (Asya / Uzakdoğu vs.)
-            if (IsAsianDestination())
-            {
-                int asiaNum = (index % 8) + 1;
-                LoadImageSafe(EveningImage, $"dinner_asia_{asiaNum}.jpg");
-            }
-            else
-            {
-                int eveningNum = (index % 5) + 1;
-                LoadImageSafe(EveningImage, $"evening_{eveningNum}.jpg");
-            }
+            // Kullanıcının gönderdiği 8 adet Pinterest Akşam Yemeği Fotoğrafı (Her gün için sırayla)
+            LoadImageSafe(EveningImage, $"dinner_asia_{dinnerNum}.jpg");
 
             AnimatePanel(DayDetailCardsPanel);
         }
@@ -696,6 +688,12 @@ Tam {totalDays} günlük plan hazırla.
             try
             {
                 string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", fileName);
+                if (!System.IO.File.Exists(path))
+                {
+                    string altPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                    if (System.IO.File.Exists(altPath)) path = altPath;
+                }
+
                 if (System.IO.File.Exists(path))
                 {
                     var bmp = new BitmapImage();
@@ -704,6 +702,10 @@ Tam {totalDays} günlük plan hazırla.
                     bmp.CacheOption = BitmapCacheOption.OnLoad;
                     bmp.EndInit();
                     imgElement.Source = bmp;
+                }
+                else
+                {
+                    imgElement.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/{fileName}"));
                 }
             }
             catch { }
