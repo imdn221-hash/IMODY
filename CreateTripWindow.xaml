@@ -60,8 +60,8 @@
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <!-- GÜNEŞ IŞILTILI SU / OKYANUS VİDEO ARKA PLANI (PINTEREST ESTETİĞİ) -->
-        <Grid Grid.RowSpan="3" IsHitTestVisible="False">
+        <!-- ÇARKLARIN DÖNDÜĞÜ SİNEMATİK ARKA PLAN (UZAKTAN & YAVAŞLATILMIŞ) -->
+        <Grid Grid.RowSpan="3" IsHitTestVisible="False" ClipToBounds="True">
             <MediaElement x:Name="WaterVideoPlayer"
                           LoadedBehavior="Manual"
                           UnloadedBehavior="Stop"
@@ -71,20 +71,15 @@
                           HorizontalAlignment="Center"
                           IsMuted="True"
                           Volume="0"
-                          SpeedRatio="1.0"
-                          Opacity="0.95"/>
+                          SpeedRatio="0.25"
+                          Opacity="0.95">
+                <MediaElement.RenderTransform>
+                    <ScaleTransform ScaleX="0.82" ScaleY="0.82" CenterX="575" CenterY="360"/>
+                </MediaElement.RenderTransform>
+            </MediaElement>
 
-            <!-- İnce Karartma Katmanı (Videonun ışıltısı belirgin, yazılar net) -->
-            <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.10"/>
-
-            <!-- Sol Üst Yumuşak Parıltı -->
-            <Ellipse Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-100,-100,0,0" Fill="{DynamicResource Theme_BgCard}" Opacity="0.35">
-                <Ellipse.Effect><BlurEffect Radius="90"/></Ellipse.Effect>
-            </Ellipse>
-            <!-- Sağ Alt Altın/Kozmik Parıltı -->
-            <Ellipse Width="400" Height="400" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-80,-80" Fill="{DynamicResource Theme_Accent}" Opacity="0.12">
-                <Ellipse.Effect><BlurEffect Radius="80"/></Ellipse.Effect>
-            </Ellipse>
+            <!-- İnce Karartma Katmanı (Yazılar kristal netliğinde) -->
+            <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.12"/>
         </Grid>
 
         <!-- ÜST BAR -->

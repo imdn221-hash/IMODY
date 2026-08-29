@@ -61,10 +61,10 @@ namespace IMODY
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SwitchBackgroundVideo("bg_date_step.mp4", 0.45);
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.25);
         }
 
-        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.5)
+        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.25)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace IMODY
                 {
                     string alt = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, videoFileName);
                     if (System.IO.File.Exists(alt)) videoPath = alt;
-                    else videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ocean_turtle.mp4");
+                    else videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "bg_ody_creating.mp4");
                 }
 
                 if (System.IO.File.Exists(videoPath))
@@ -170,10 +170,12 @@ namespace IMODY
             StepBadge.Text = $"ADIM {step} / 5";
             UIElement? activePanel = null;
 
+            // Çarkların döndüğü sinematik arka plan (Ultra Slow-Mo 0.25x)
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.25);
+
             switch (step)
             {
                 case DateStep:
-                    SwitchBackgroundVideo("bg_date_step.mp4");
                     QuestionText.Text = $"{destination} için ne zaman yola çıkıyoruz?";
                     DatePanel.Visibility = Visibility.Visible;
                     activePanel = DatePanel;
@@ -181,7 +183,6 @@ namespace IMODY
                     break;
 
                 case PeopleStep:
-                    SwitchBackgroundVideo("ocean_turtle.mp4");
                     QuestionText.Text = "Kaç kişi seyahat edeceksiniz?";
                     PeoplePanel.Visibility = Visibility.Visible;
                     activePanel = PeoplePanel;
@@ -189,7 +190,6 @@ namespace IMODY
                     break;
 
                 case AccommodationStep:
-                    SwitchBackgroundVideo("ocean_turtle.mp4");
                     QuestionText.Text = "Konaklama durumun nasıl?";
                     AccommodationPanel.Visibility = Visibility.Visible;
                     activePanel = AccommodationPanel;
@@ -197,7 +197,6 @@ namespace IMODY
                     break;
 
                 case InterestsStep:
-                    SwitchBackgroundVideo("bg_ody_chat.mp4");
                     QuestionText.Text = "Ody ile Rota Sohbeti";
                     InterestChatPanel.Visibility = Visibility.Visible;
                     activePanel = InterestChatPanel;
@@ -210,7 +209,6 @@ namespace IMODY
                     break;
 
                 case PlanStep:
-                    SwitchBackgroundVideo("bg_ody_chat.mp4");
                     QuestionText.Text = $"{destination} Seyahat Planın";
                     PlanDisplayPanel.Visibility = Visibility.Visible;
                     activePanel = PlanDisplayPanel;
