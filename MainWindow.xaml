@@ -71,12 +71,28 @@
     </Window.Resources>
 
     <Grid ClipToBounds="True" Background="{DynamicResource Theme_BgPrimary}">
-        <!-- DİNAMİK AMBİENT PARILTILAR -->
+        <!-- ARKA PLAN GALAKSİ VİDEOSU (PINTEREST GALAXY SWIRL) -->
         <Grid IsHitTestVisible="False">
-            <Ellipse Width="650" Height="650" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-180,0" Fill="{DynamicResource Theme_BgCard}" Opacity="0.55">
+            <MediaElement x:Name="GalaxyVideoPlayer"
+                          LoadedBehavior="Manual"
+                          UnloadedBehavior="Stop"
+                          MediaEnded="GalaxyVideoPlayer_MediaEnded"
+                          Stretch="UniformToFill"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          IsMuted="True"
+                          Volume="0"
+                          SpeedRatio="1.0"
+                          Opacity="0.60"/>
+
+            <!-- Karartma & Tema Renk Uyum Katmanı -->
+            <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.45"/>
+
+            <!-- DİNAMİK AMBİENT PARILTILAR -->
+            <Ellipse Width="650" Height="650" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-180,0" Fill="{DynamicResource Theme_BgCard}" Opacity="0.45">
                 <Ellipse.Effect><BlurEffect Radius="90"/></Ellipse.Effect>
             </Ellipse>
-            <Ellipse Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-160,0,0,-160" Fill="{DynamicResource Theme_Accent}" Opacity="0.12">
+            <Ellipse Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-160,0,0,-160" Fill="{DynamicResource Theme_Accent}" Opacity="0.15">
                 <Ellipse.Effect><BlurEffect Radius="85"/></Ellipse.Effect>
             </Ellipse>
         </Grid>

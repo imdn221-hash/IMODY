@@ -20,6 +20,34 @@ namespace IMODY
             ThemeManager.ApplyTheme(UserSession.CurrentTheme);
             SetTimeBasedGreeting();
             Setup3DGlobe();
+            PlayGalaxyVideo();
+        }
+
+        private void PlayGalaxyVideo()
+        {
+            try
+            {
+                string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "bg_galaxy.mp4");
+                if (File.Exists(videoPath))
+                {
+                    GalaxyVideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
+                    GalaxyVideoPlayer.IsMuted = true;
+                    GalaxyVideoPlayer.Volume = 0;
+                    GalaxyVideoPlayer.SpeedRatio = 1.0;
+                    GalaxyVideoPlayer.Play();
+                }
+            }
+            catch { }
+        }
+
+        private void GalaxyVideoPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                GalaxyVideoPlayer.Position = TimeSpan.Zero;
+                GalaxyVideoPlayer.Play();
+            }
+            catch { }
         }
 
         // =========================================================
