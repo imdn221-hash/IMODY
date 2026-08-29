@@ -163,16 +163,6 @@ namespace IMODY
             RoutePanel.Opacity = 0;
             WelcomeAnimationCanvas.Children.Clear();
             StartWelcomeAnimation();
-
-            if (!UserSession.HasSeenRankIntro)
-            {
-                Dispatcher.InvokeAsync(async () =>
-                {
-                    await Task.Delay(1000);
-                    RankIntroWindow rankIntro = new RankIntroWindow { Owner = this };
-                    rankIntro.ShowDialog();
-                });
-            }
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

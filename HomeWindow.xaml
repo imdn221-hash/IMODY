@@ -96,7 +96,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="58"/>
         </Grid.RowDefinitions>
 
         <!-- ÜST BAR -->
@@ -315,17 +314,6 @@
                         </Border>
                     </Grid>
                 </StackPanel>
-            </StackPanel>
-        </Grid>
-
-        <!-- ALT NAVİGASYON -->
-        <Grid Grid.Row="2" Background="{DynamicResource Theme_BgCard}" Panel.ZIndex="10">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="⌂  Ana Sayfa" Width="125" Style="{StaticResource NavButtonStyle}" Foreground="{DynamicResource Theme_Accent}"/>
-                <Button Content="＋  Oluştur" Width="125" Style="{StaticResource NavButtonStyle}" Click="CreateButton_Click"/>
-                <Button Content="◈  Keşfet" Width="125" Style="{StaticResource NavButtonStyle}" Click="ExploreButton_Click"/>
-                <Button Content="ⓘ  Hakkında" Width="125" Style="{StaticResource NavButtonStyle}" Click="AboutButton_Click"/>
-                <Button Content="⚙  Ayarlar" Width="125" Style="{StaticResource NavButtonStyle}" Click="SettingsButton_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

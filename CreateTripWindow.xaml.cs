@@ -177,7 +177,7 @@ namespace IMODY
             switch (step)
             {
                 case DateStep:
-                    SwitchBackgroundVideo("ocean_turtle.mp4");
+                    SwitchBackgroundVideo("bg_date_step.mp4");
                     QuestionText.Text = $"{destination} için ne zaman yola çıkıyoruz?";
                     DatePanel.Visibility = Visibility.Visible;
                     activePanel = DatePanel;
@@ -296,9 +296,16 @@ namespace IMODY
         // =========================================================
         // KONAKLAMA SEÇİMLERİ & LİNKLER
         // =========================================================
+        private bool isCampModeSelected = false;
+
         private void AccHavePlace_Click(object sender, MouseButtonEventArgs e)
         {
             selectedAccommodation = "Yerim Var";
+            isCampModeSelected = false;
+            SelectCampModeButton.Content = "🏕️ Kampı Seç";
+            SelectCampModeButton.Background = new SolidColorBrush(Color.FromRgb(101, 22, 47));
+            SelectCampModeButton.Foreground = new SolidColorBrush(Color.FromRgb(245, 233, 221));
+
             AccHavePlaceDot.Visibility = Visibility.Visible;
             AccNeedPlaceDot.Visibility = Visibility.Collapsed;
 
@@ -313,7 +320,7 @@ namespace IMODY
 
         private void AccNeedPlace_Click(object sender, MouseButtonEventArgs e)
         {
-            selectedAccommodation = "Yerim Yok";
+            selectedAccommodation = isCampModeSelected ? "Doğa ve Çadır Kampı (Survival Modu)" : "Yerim Yok";
             AccNeedPlaceDot.Visibility = Visibility.Visible;
             AccHavePlaceDot.Visibility = Visibility.Collapsed;
 
@@ -328,9 +335,22 @@ namespace IMODY
 
         private void SelectCampMode_Click(object sender, RoutedEventArgs e)
         {
-            selectedAccommodation = "Doğa ve Çadır Kampı (Survival Modu)";
-            SelectCampModeButton.Content = "✓ Kamp Seçildi!";
-            SelectCampModeButton.Background = new SolidColorBrush(Color.FromRgb(40, 140, 70));
+            if (!isCampModeSelected)
+            {
+                isCampModeSelected = true;
+                selectedAccommodation = "Doğa ve Çadır Kampı (Survival Modu)";
+                SelectCampModeButton.Content = "✓ Kamp Seçildi!";
+                SelectCampModeButton.Background = new SolidColorBrush(Color.FromRgb(40, 140, 70));
+                SelectCampModeButton.Foreground = Brushes.White;
+            }
+            else
+            {
+                isCampModeSelected = false;
+                selectedAccommodation = "Yerim Yok";
+                SelectCampModeButton.Content = "🏕️ Kampı Seç";
+                SelectCampModeButton.Background = new SolidColorBrush(Color.FromRgb(101, 22, 47));
+                SelectCampModeButton.Foreground = new SolidColorBrush(Color.FromRgb(245, 233, 221));
+            }
         }
 
         private void OpenTrivago_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl($"https://www.trivago.com.tr/tr/srl?search={Uri.EscapeDataString(destination)}");
@@ -484,6 +504,7 @@ KURALLAR:
         private async Task GeneratePlanAsync()
         {
             isGenerating = true;
+            SwitchBackgroundVideo("bg_ody_creating.mp4");
             MorningText.Text = "✨ Ody gün gün rotaları, Pinterest kahvaltılarını ve ulaşım tüyolarını hazırlıyor...";
             AfternoonText.Text = "Lütfen birkaç saniye bekle...";
             EveningText.Text = "Mitolojik hikayeler, yöresel sokak lezzetleri ve oyun modu hazırlanıyor...";
@@ -608,6 +629,7 @@ Tam {totalDays} günlük plan hazırla.
                 allGameMode = $"{selectedPeopleCount} kişi için oyun: 'Şehir Dedektifi' - Gün boyu en ilginç sokak tabelasını ve tarihi kapı tokmağını ilk bulan kazanır!";
             }
 
+            SwitchBackgroundVideo("bg_ody_chat.mp4");
             BuildDayBoxes();
         }
 
