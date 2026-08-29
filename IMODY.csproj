@@ -49,6 +49,15 @@
 		<Resource Include="Resources\ody_mascot_portrait.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\app_icon.ico">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\app_cover.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\app_logo.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 
 		<None Update="Resources\golden_water.mp4">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
