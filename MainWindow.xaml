@@ -83,10 +83,10 @@
                           IsMuted="True"
                           Volume="0"
                           SpeedRatio="1.0"
-                          Opacity="0.60"/>
+                          Opacity="0.92"/>
 
-            <!-- Karartma & Tema Renk Uyum Katmanı -->
-            <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.45"/>
+            <!-- İnce Renk Uyum Katmanı -->
+            <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.10"/>
 
             <!-- DİNAMİK AMBİENT PARILTILAR -->
             <Ellipse Width="650" Height="650" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-180,0" Fill="{DynamicResource Theme_BgCard}" Opacity="0.45">
