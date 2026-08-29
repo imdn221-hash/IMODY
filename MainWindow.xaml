@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:IMODY"
         mc:Ignorable="d"
         Title="IMODY - AI Seyahat Koçu"
+        Icon="Resources/app_icon.ico"
         Height="720"
         Width="1220"
         MinHeight="640"

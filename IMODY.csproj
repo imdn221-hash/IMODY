@@ -8,6 +8,7 @@
 		<UseWPF>true</UseWPF>
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 		<UserSecretsId>imody-user-secrets-8d2fa4fd-ddf5-4420</UserSecretsId>
+		<ApplicationIcon>Resources\app_icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -59,6 +60,15 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Resources\ocean_turtle.mp4">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\app_icon.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\app_cover.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\app_logo.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Resources\ody_video_*.mp4">
