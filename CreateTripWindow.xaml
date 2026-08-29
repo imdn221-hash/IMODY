@@ -60,7 +60,7 @@
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <!-- ÇARKLARIN DÖNDÜĞÜ SİNEMATİK ARKA PLAN (UZAKTAN & YAVAŞLATILMIŞ) -->
+        <!-- ÇARKLARIN DÖNDÜĞÜ SİNEMATİK ARKA PLAN (TAM EKRANA OTURTULMUŞ & ULTRA YAVAŞLATILMIŞ) -->
         <Grid Grid.RowSpan="3" IsHitTestVisible="False" ClipToBounds="True">
             <MediaElement x:Name="WaterVideoPlayer"
                           LoadedBehavior="Manual"
@@ -71,12 +71,8 @@
                           HorizontalAlignment="Center"
                           IsMuted="True"
                           Volume="0"
-                          SpeedRatio="0.25"
-                          Opacity="0.95">
-                <MediaElement.RenderTransform>
-                    <ScaleTransform ScaleX="0.82" ScaleY="0.82" CenterX="575" CenterY="360"/>
-                </MediaElement.RenderTransform>
-            </MediaElement>
+                          SpeedRatio="0.12"
+                          Opacity="0.95"/>
 
             <!-- İnce Karartma Katmanı (Yazılar kristal netliğinde) -->
             <Rectangle Fill="{DynamicResource Theme_BgPrimary}" Opacity="0.12"/>

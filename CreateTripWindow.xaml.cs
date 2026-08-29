@@ -61,10 +61,10 @@ namespace IMODY
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.25);
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
         }
 
-        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.25)
+        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.12)
         {
             try
             {
@@ -170,8 +170,8 @@ namespace IMODY
             StepBadge.Text = $"ADIM {step} / 5";
             UIElement? activePanel = null;
 
-            // Çarkların döndüğü sinematik arka plan (Ultra Slow-Mo 0.25x)
-            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.25);
+            // Çarkların döndüğü sinematik arka plan (Ultra Slow-Mo 0.12x)
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
 
             switch (step)
             {
