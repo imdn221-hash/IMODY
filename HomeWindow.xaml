@@ -93,13 +93,13 @@
     </Window.Resources>
 
     <Grid Background="{DynamicResource Theme_BgPrimary}">
-        <!-- DERİN UZAY, NEBULA VE PARILDAYAN YILDIZLAR KATMANI (Tüm Sayfa) -->
-        <Canvas x:Name="SpaceBackgroundCanvas" Grid.RowSpan="2" IsHitTestVisible="False" ClipToBounds="True"/>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!-- DERİN UZAY, NEBULA VE PARILDAYAN YILDIZLAR KATMANI (Tüm Sayfa) -->
+        <Canvas x:Name="SpaceBackgroundCanvas" Grid.RowSpan="2" IsHitTestVisible="False" ClipToBounds="True"/>
 
         <!-- ÜST BAR (ŞEFFAF, BORDO ARKA PLANSIZ) -->
         <Grid Grid.Row="0" Background="Transparent" Panel.ZIndex="10">
