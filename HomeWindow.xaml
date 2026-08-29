@@ -46,11 +46,58 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        <Style x:Key="CountryPinStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource Theme_BgCard}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Theme_TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Theme_Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E5B56B"/>
+                    <Setter Property="Background" Value="{DynamicResource Theme_Accent}"/>
+                    <Setter Property="Foreground" Value="#2B0717"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CityPinStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource Theme_Accent}"/>
+            <Setter Property="Foreground" Value="#2B0717"/>
+            <Setter Property="BorderBrush" Value="#2B0717"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="10.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="7,3"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
 
