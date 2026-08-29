@@ -46,6 +46,8 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
         <Style x:Key="CountryPinStyle" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource Theme_BgCard}"/>
             <Setter Property="Foreground" Value="{DynamicResource Theme_TextPrimary}"/>

@@ -61,25 +61,21 @@ namespace IMODY
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SetupBackgroundVideo();
+            SwitchBackgroundVideo("bg_date_step.mp4", 0.45);
         }
 
-        private void SetupBackgroundVideo()
-        {
-            SwitchBackgroundVideo("ocean_turtle.mp4");
-        }
-
-        private void SwitchBackgroundVideo(string videoFileName)
+        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.5)
         {
             try
             {
-                if (currentVideoFile == videoFileName && WaterVideoPlayer.Source != null) return;
                 currentVideoFile = videoFileName;
 
                 string videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", videoFileName);
                 if (!System.IO.File.Exists(videoPath))
                 {
-                    videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ocean_turtle.mp4");
+                    string alt = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, videoFileName);
+                    if (System.IO.File.Exists(alt)) videoPath = alt;
+                    else videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ocean_turtle.mp4");
                 }
 
                 if (System.IO.File.Exists(videoPath))
@@ -87,7 +83,7 @@ namespace IMODY
                     WaterVideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
                     WaterVideoPlayer.IsMuted = true;
                     WaterVideoPlayer.Volume = 0;
-                    WaterVideoPlayer.SpeedRatio = 1.0;
+                    WaterVideoPlayer.SpeedRatio = speedRatio;
                     WaterVideoPlayer.Play();
                 }
             }
@@ -504,7 +500,7 @@ KURALLAR:
         private async Task GeneratePlanAsync()
         {
             isGenerating = true;
-            SwitchBackgroundVideo("bg_ody_creating.mp4");
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.35);
             MorningText.Text = "✨ Ody gün gün rotaları, Pinterest kahvaltılarını ve ulaşım tüyolarını hazırlıyor...";
             AfternoonText.Text = "Lütfen birkaç saniye bekle...";
             EveningText.Text = "Mitolojik hikayeler, yöresel sokak lezzetleri ve oyun modu hazırlanıyor...";
