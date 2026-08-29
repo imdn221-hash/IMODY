@@ -35,6 +35,7 @@ namespace IMODY
         private string allFoodDiscovery = "";
         private string allGameMode = "";
         private int activeDayIndex = 0;
+        private string currentVideoFile = "";
 
         public CreateTripWindow(string destination)
         {
@@ -60,12 +61,25 @@ namespace IMODY
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            SetupBackgroundVideo();
+        }
+
+        private void SetupBackgroundVideo()
+        {
+            SwitchBackgroundVideo("ocean_turtle.mp4");
+        }
+
+        private void SwitchBackgroundVideo(string videoFileName)
+        {
             try
             {
-                string videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ocean_turtle.mp4");
+                if (currentVideoFile == videoFileName && WaterVideoPlayer.Source != null) return;
+                currentVideoFile = videoFileName;
+
+                string videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", videoFileName);
                 if (!System.IO.File.Exists(videoPath))
                 {
-                    videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "beach_water.mp4");
+                    videoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ocean_turtle.mp4");
                 }
 
                 if (System.IO.File.Exists(videoPath))
@@ -109,18 +123,23 @@ namespace IMODY
         {
             if (isGenerating) return;
 
-            if (!ValidateCurrentStep()) return;
-
-            if (currentStep < InterestsStep)
+            if (currentStep == DateStep)
             {
+                if (DepartureDatePicker.SelectedDate == null || ReturnDatePicker.SelectedDate == null)
+                {
+                    MessageBox.Show("Lütfen gidiş ve dönüş tarihlerinizi seçin.", "Eksik Bilgi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 ShowStep(currentStep + 1);
-                return;
             }
-
-            if (currentStep == InterestsStep)
+            else if (currentStep == InterestsStep)
             {
                 ShowStep(PlanStep);
                 await GeneratePlanAsync();
+            }
+            else
+            {
+                ShowStep(currentStep + 1);
             }
         }
 
@@ -158,6 +177,7 @@ namespace IMODY
             switch (step)
             {
                 case DateStep:
+                    SwitchBackgroundVideo("ocean_turtle.mp4");
                     QuestionText.Text = $"{destination} için ne zaman yola çıkıyoruz?";
                     DatePanel.Visibility = Visibility.Visible;
                     activePanel = DatePanel;
@@ -165,6 +185,7 @@ namespace IMODY
                     break;
 
                 case PeopleStep:
+                    SwitchBackgroundVideo("ocean_turtle.mp4");
                     QuestionText.Text = "Kaç kişi seyahat edeceksiniz?";
                     PeoplePanel.Visibility = Visibility.Visible;
                     activePanel = PeoplePanel;
@@ -172,6 +193,7 @@ namespace IMODY
                     break;
 
                 case AccommodationStep:
+                    SwitchBackgroundVideo("ocean_turtle.mp4");
                     QuestionText.Text = "Konaklama durumun nasıl?";
                     AccommodationPanel.Visibility = Visibility.Visible;
                     activePanel = AccommodationPanel;
@@ -179,6 +201,7 @@ namespace IMODY
                     break;
 
                 case InterestsStep:
+                    SwitchBackgroundVideo("bg_ody_chat.mp4");
                     QuestionText.Text = "Ody ile Rota Sohbeti";
                     InterestChatPanel.Visibility = Visibility.Visible;
                     activePanel = InterestChatPanel;
@@ -191,6 +214,7 @@ namespace IMODY
                     break;
 
                 case PlanStep:
+                    SwitchBackgroundVideo("bg_ody_chat.mp4");
                     QuestionText.Text = $"{destination} Seyahat Planın";
                     PlanDisplayPanel.Visibility = Visibility.Visible;
                     activePanel = PlanDisplayPanel;
@@ -203,6 +227,12 @@ namespace IMODY
             {
                 AnimatePanel(activePanel);
             }
+        }
+
+        private void OpenFarewell_Click(object sender, RoutedEventArgs e)
+        {
+            var farewell = new TripFarewellWindow(destination) { Owner = this };
+            farewell.ShowDialog();
         }
 
         private void AnimatePanel(UIElement panel)

@@ -74,6 +74,8 @@ namespace IMODY
 
         private void RefreshPhotoSlots()
         {
+            if (selectedMemory == null) return;
+
             var images = new[] { Img1, Img2, Img3, Img4, Img5 };
             var placeholders = new[] { Placeholder1, Placeholder2, Placeholder3, Placeholder4, Placeholder5 };
             var delBtns = new[] { DelBtn1, DelBtn2, DelBtn3, DelBtn4, DelBtn5 };

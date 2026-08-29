@@ -10,11 +10,13 @@ namespace IMODY
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Title { get; set; } = "";
         public string AuthorName { get; set; } = "";
+        public bool IsOfficial { get; set; } = false;
         public string Category { get; set; } = "🏛️ Belediye / Festival"; // 🏛️ Belediye, 🎵 Konser, 🎒 Gezgin
         public string City { get; set; } = "";
         public string Content { get; set; } = "";
         public string EventDate { get; set; } = "";
         public string PriceInfo { get; set; } = "Ücretsiz";
+        public int LikesCount { get; set; } = 12;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 
@@ -33,41 +35,49 @@ namespace IMODY
                 {
                     Title = "Travis Scott: Utopia World Tour",
                     AuthorName = "Live Nation UK",
+                    IsOfficial = true,
                     Category = "🎵 Konser / Gösteri",
                     City = "Londra",
                     Content = "Travis Scott Londra O2 Arena'da sahne alıyor! Muazzam görsel şovlar ve efsanevi sahne performansı seni bekliyor.",
                     EventDate = "28 Ağustos 2026 - 20:30",
-                    PriceInfo = "£85 - Ücretli"
+                    PriceInfo = "£85 - Ücretli",
+                    LikesCount = 284
                 },
                 new ExplorePost
                 {
                     Title = "Buca Belediyesi Açık Hava Sinema Günleri",
                     AuthorName = "Buca Belediyesi",
+                    IsOfficial = true,
                     Category = "🏛️ Belediye / Festival",
                     City = "İzmir",
                     Content = "Hasanağa Bahçesi'nde çimlerin üzerinde nostaljik Türk sineması gösterimi ve ücretsiz mısır ikramı.",
                     EventDate = "Bu Akşam - 21:00",
-                    PriceInfo = "Ücretsiz"
+                    PriceInfo = "Ücretsiz",
+                    LikesCount = 95
                 },
                 new ExplorePost
                 {
                     Title = "Kapadokya Vadisi Dolunay Gece Yürüyüşü & Kamp",
                     AuthorName = "Kapadokya Gezginler Kulübü",
+                    IsOfficial = false,
                     Category = "🎒 Gezgin Keşfi",
                     City = "Kapadokya",
                     Content = "Dolunay ışığında peri bacaları arasında mistik yürüyüş ve gece akustik kamp ateşi dinletisi.",
                     EventDate = "Yarın - 22:00",
-                    PriceInfo = "Ücretsiz"
+                    PriceInfo = "Ücretsiz",
+                    LikesCount = 142
                 },
                 new ExplorePost
                 {
                     Title = "Roma Trastevere Sokak Lezzetleri Festivali",
                     AuthorName = "Roma Kültür & Sanat Vakfı",
+                    IsOfficial = true,
                     Category = "🏛️ Belediye / Festival",
                     City = "Roma",
                     Content = "Trastevere sokaklarında geleneksel el yapımı makarnalar, taze gelato ve yerel müzisyenlerin performansları.",
                     EventDate = "Hafta Sonu Boyunca",
-                    PriceInfo = "Ücretsiz Giriş"
+                    PriceInfo = "Ücretsiz Giriş",
+                    LikesCount = 310
                 }
             };
         }
@@ -98,12 +108,16 @@ namespace IMODY
             }
         }
 
+        public static List<ExplorePost> GetPosts() => GetAll();
+
         public static void Add(ExplorePost post)
         {
             List<ExplorePost> posts = GetAll();
             posts.Insert(0, post);
             SaveAll(posts);
         }
+
+        public static void AddPost(ExplorePost post) => Add(post);
 
         private static void SaveAll(List<ExplorePost> posts)
         {
