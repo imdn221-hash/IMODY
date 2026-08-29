@@ -93,13 +93,16 @@
     </Window.Resources>
 
     <Grid Background="{DynamicResource Theme_BgPrimary}">
+        <!-- DERİN UZAY, NEBULA VE PARILDAYAN YILDIZLAR KATMANI (Tüm Sayfa) -->
+        <Canvas x:Name="SpaceBackgroundCanvas" Grid.RowSpan="2" IsHitTestVisible="False" ClipToBounds="True"/>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ÜST BAR -->
-        <Grid Grid.Row="0" Background="{DynamicResource Theme_BgPrimary}" Panel.ZIndex="10">
+        <!-- ÜST BAR (ŞEFFAF, BORDO ARKA PLANSIZ) -->
+        <Grid Grid.Row="0" Background="Transparent" Panel.ZIndex="10">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="28,0,0,0">
                 <Border Width="34" Height="34" CornerRadius="17" Background="{DynamicResource Theme_Accent}">
                     <TextBlock Text="O" Foreground="#2B0717" FontSize="19" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -158,8 +161,6 @@
 
         <!-- ANA ALAN: 3D DÜNYA VE ARAYÜZ -->
         <Grid Grid.Row="1">
-            <!-- DERİN UZAY, NEBULA VE PARILDAYAN YILDIZLAR KATMANI -->
-            <Canvas x:Name="SpaceBackgroundCanvas" IsHitTestVisible="False" ClipToBounds="True"/>
 
             <!-- GERÇEKÇİ UZAY / ATMOSFER IŞIMASI (NEBULA HALO GLOW) -->
             <Grid IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center">
