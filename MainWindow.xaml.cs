@@ -153,6 +153,14 @@ namespace IMODY
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             HomeWindow home = new HomeWindow();
+            home.WindowState = this.WindowState;
+            if (this.WindowState != WindowState.Maximized)
+            {
+                home.Left = this.Left;
+                home.Top = this.Top;
+                home.Width = this.Width;
+                home.Height = this.Height;
+            }
             home.Show();
             Close();
         }

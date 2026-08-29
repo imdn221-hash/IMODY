@@ -107,6 +107,14 @@ namespace IMODY
             if (currentStep == DateStep)
             {
                 HomeWindow home = new HomeWindow();
+                home.WindowState = this.WindowState;
+                if (this.WindowState != WindowState.Maximized)
+                {
+                    home.Left = this.Left;
+                    home.Top = this.Top;
+                    home.Width = this.Width;
+                    home.Height = this.Height;
+                }
                 home.Show();
                 Close();
                 return;
@@ -623,7 +631,7 @@ Tam {totalDays} günlük plan hazırla.
                 allGameMode = $"{selectedPeopleCount} kişi için oyun: 'Şehir Dedektifi' - Gün boyu en ilginç sokak tabelasını ve tarihi kapı tokmağını ilk bulan kazanır!";
             }
 
-            SwitchBackgroundVideo("bg_ody_chat.mp4");
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
             BuildDayBoxes();
         }
 

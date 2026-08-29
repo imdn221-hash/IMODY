@@ -708,6 +708,14 @@ namespace IMODY
             city = tr.TextInfo.ToTitleCase(city.ToLower(tr));
 
             CreateTripWindow window = new CreateTripWindow(city);
+            window.WindowState = this.WindowState;
+            if (this.WindowState != WindowState.Maximized)
+            {
+                window.Left = this.Left;
+                window.Top = this.Top;
+                window.Width = this.Width;
+                window.Height = this.Height;
+            }
             window.Show();
             Close();
         }
