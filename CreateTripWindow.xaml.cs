@@ -652,6 +652,26 @@ Tam {totalDays} günlük plan hazırla.
             DayBoxesContainer.Children.Clear();
             if (parsedDays.Count == 0) return;
 
+            // 1. TÜM GÜNLERİN GENEL ÖZETİ BUTONU
+            Button summaryBtn = new Button
+            {
+                Content = "📋 Rota & Ulaşım Özeti",
+                Height = 36,
+                MinWidth = 160,
+                Margin = new Thickness(0, 0, 10, 0),
+                Padding = new Thickness(14, 6, 14, 6),
+                FontSize = 12,
+                FontWeight = FontWeights.Bold,
+                Cursor = Cursors.Hand
+            };
+            summaryBtn.Resources.Add(typeof(Border), new Style(typeof(Border))
+            {
+                Setters = { new Setter(Border.CornerRadiusProperty, new CornerRadius(10)) }
+            });
+            summaryBtn.Click += (s, e) => ShowTripSummaryList();
+            DayBoxesContainer.Children.Add(summaryBtn);
+
+            // 2. GÜN GÜN DETAY BUTONLARI
             for (int i = 0; i < parsedDays.Count; i++)
             {
                 int index = i;
@@ -676,7 +696,102 @@ Tam {totalDays} günlük plan hazırla.
                 DayBoxesContainer.Children.Add(dayBtn);
             }
 
-            SelectDay(0);
+            // Varsayılan olarak Tüm Günlerin Özet Listesini Aç
+            ShowTripSummaryList();
+        }
+
+        private void ShowTripSummaryList()
+        {
+            activeDayIndex = -1;
+            TripSummaryListPanel.Visibility = Visibility.Visible;
+            DayDetailCardsPanel.Visibility = Visibility.Collapsed;
+
+            // Tab butonlarını vurgula
+            for (int i = 0; i < DayBoxesContainer.Children.Count; i++)
+            {
+                if (DayBoxesContainer.Children[i] is Button btn)
+                {
+                    if (i == 0)
+                    {
+                        btn.Background = (Brush)Application.Current.Resources["Theme_Accent"];
+                        btn.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));
+                    }
+                    else
+                    {
+                        btn.Background = (Brush)Application.Current.Resources["Theme_BgSub"];
+                        btn.Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"];
+                    }
+                }
+            }
+
+            TripSummaryListPanel.Children.Clear();
+            foreach (var day in parsedDays)
+            {
+                Border card = new Border
+                {
+                    Background = (Brush)Application.Current.Resources["Theme_BgSub"],
+                    BorderBrush = (Brush)Application.Current.Resources["Theme_Border"],
+                    BorderThickness = new Thickness(1),
+                    CornerRadius = new CornerRadius(14),
+                    Padding = new Thickness(16, 14, 16, 14),
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
+
+                StackPanel sp = new StackPanel();
+
+                // Gün Başlığı: 🗓️ 1. Gün: Tarihin Kalbine Yolculuk
+                TextBlock title = new TextBlock
+                {
+                    Text = $"🗓️ {day.DayNumber}. Gün: {day.DayTitle}",
+                    FontSize = 14,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = (Brush)Application.Current.Resources["Theme_Accent"],
+                    Margin = new Thickness(0, 0, 0, 8)
+                };
+                sp.Children.Add(title);
+
+                // 📍 Gidilecek Yerler ve Gezi Durakları
+                TextBlock placesHeader = new TextBlock
+                {
+                    Text = "📍 Gidilecek Yerler & Gezi Durakları:",
+                    FontSize = 11.5,
+                    FontWeight = FontWeights.SemiBold,
+                    Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"],
+                    Margin = new Thickness(0, 0, 0, 4)
+                };
+                sp.Children.Add(placesHeader);
+
+                TextBlock placesText = new TextBlock
+                {
+                    Text = $"• Sabah: {day.MorningBreakfast}\n• Öğle: {day.AfternoonActivity}\n• Akşam: {day.EveningActivity}",
+                    FontSize = 11.5,
+                    LineHeight = 17,
+                    Foreground = (Brush)Application.Current.Resources["Theme_TextPrimary"],
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(6, 0, 0, 8)
+                };
+                sp.Children.Add(placesText);
+
+                // 🚆 Altında Ulaşım Rehberi
+                Border transitBadge = new Border
+                {
+                    Background = (Brush)Application.Current.Resources["Theme_BgCard"],
+                    CornerRadius = new CornerRadius(8),
+                    Padding = new Thickness(10, 6, 10, 6)
+                };
+                TextBlock transitText = new TextBlock
+                {
+                    Text = $"🚆 Ulaşım Rehberi: {day.MorningTransit} | {day.AfternoonTransit} | {day.EveningTransit}",
+                    FontSize = 11,
+                    FontWeight = FontWeights.SemiBold,
+                    Foreground = (Brush)Application.Current.Resources["Theme_Accent"]
+                };
+                transitBadge.Child = transitText;
+                sp.Children.Add(transitBadge);
+
+                card.Child = sp;
+                TripSummaryListPanel.Children.Add(card);
+            }
         }
 
         private void SelectDay(int index)
@@ -684,12 +799,15 @@ Tam {totalDays} günlük plan hazırla.
             if (index < 0 || index >= parsedDays.Count) return;
             activeDayIndex = index;
 
-            // Gün butonlarını vurgula
+            TripSummaryListPanel.Visibility = Visibility.Collapsed;
+            DayDetailCardsPanel.Visibility = Visibility.Visible;
+
+            // Gün butonlarını vurgula (0. indeks özet butonu, 1+ indeks günler)
             for (int i = 0; i < DayBoxesContainer.Children.Count; i++)
             {
                 if (DayBoxesContainer.Children[i] is Button btn)
                 {
-                    if (i == index)
+                    if (i == index + 1)
                     {
                         btn.Background = (Brush)Application.Current.Resources["Theme_Accent"];
                         btn.Foreground = new SolidColorBrush(Color.FromRgb(43, 7, 23));

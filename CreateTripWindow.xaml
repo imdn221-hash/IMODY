@@ -407,72 +407,78 @@
                             <StackPanel x:Name="DayBoxesContainer" Orientation="Horizontal"/>
                         </ScrollViewer>
 
-                        <!-- SEÇİLEN GÜNÜN ZENGİN İÇERİĞİ (SABAH, ÖĞLE, AKŞAM KARTLARI) -->
+                        <!-- SEÇİLEN GÜNÜN ZENGİN İÇERİĞİ VEYA TÜM GÜNLERİN ÖZETİ -->
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
-                            <StackPanel x:Name="DayDetailCardsPanel">
-                                <!-- 1. Kart: Gidilecek Yerler & Günün Rota Listesi -->
-                                <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="74"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <!-- Rota / Keşif Fotoğrafı -->
-                                        <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
-                                            <Image x:Name="MorningBreakfastImage" Stretch="UniformToFill"/>
-                                        </Border>
-                                        
-                                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                                            <TextBlock Text="📍 GÜNÜN ROTASI &amp; GİDİLECEK YERLER LİSTESİ" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
-                                            <TextBlock x:Name="MorningText" Text="Şehrin görülmesi gereken en popüler noktaları ve ikonik mekanları..." FontSize="12" LineHeight="18" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
-                                            <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
-                                                <TextBlock x:Name="MorningTransitText" Text="🚶‍♂️ Yürüme mesafesinde" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
-                                            </Border>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
+                            <Grid>
+                                <!-- TÜM SEYAHATİN GÜN GÜN ÖZETİ & ULAŞIM REHBERİ PANELİ -->
+                                <StackPanel x:Name="TripSummaryListPanel" Visibility="Visible"/>
 
-                                <!-- Öğle Kartı (Kültür Fotoğrafı & Ulaşım Tüyosu) -->
-                                <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="74"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
-                                            <Image x:Name="AfternoonImage" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                                            <TextBlock Text="ÖĞLE: Kültür, Tarih &amp; Keşif" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
-                                            <TextBlock x:Name="AfternoonText" Text="Şehrin ikonik müzeleri ve antik sokakları..." FontSize="12" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
-                                            <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
-                                                <TextBlock x:Name="AfternoonTransitText" Text="🚌 Otobüs / Metro ile 10 dk" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
+                                <!-- Seçilen Günün Detaylı Kartları -->
+                                <StackPanel x:Name="DayDetailCardsPanel" Visibility="Collapsed">
+                                    <!-- 1. Kart: Gidilecek Yerler & Günün Rota Listesi -->
+                                    <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="74"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <!-- Rota / Keşif Fotoğrafı -->
+                                            <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
+                                                <Image x:Name="MorningBreakfastImage" Stretch="UniformToFill"/>
                                             </Border>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
+                                            
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="📍 GÜNÜN ROTASI &amp; GİDİLECEK YERLER LİSTESİ" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
+                                                <TextBlock x:Name="MorningText" Text="Şehrin görülmesi gereken en popüler noktaları ve ikonik mekanları..." FontSize="12" LineHeight="18" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
+                                                <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
+                                                    <TextBlock x:Name="MorningTransitText" Text="🚶‍♂️ Yürüme mesafesinde" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
 
-                                <!-- Akşam Kartı (Gün Batımı, Akşam Yemeği Fotoğrafı & Ulaşım Tüyosu) -->
-                                <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="74"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
-                                            <Image x:Name="EveningImage" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                                            <TextBlock Text="AKŞAM: Gün Batımı &amp; Akşam Yemeği" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
-                                            <TextBlock x:Name="EveningText" Text="Manzara seyir noktası ve geleneksel akşam yemeği..." FontSize="12" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
-                                            <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
-                                                <TextBlock x:Name="EveningTransitText" Text="🚶‍♂️ 12 dk sahil / sokak yürüyüşü" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
+                                    <!-- Öğle Kartı (Kültür Fotoğrafı & Ulaşım Tüyosu) -->
+                                    <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="74"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
+                                                <Image x:Name="AfternoonImage" Stretch="UniformToFill"/>
                                             </Border>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="ÖĞLE: Kültür, Tarih &amp; Keşif" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
+                                                <TextBlock x:Name="AfternoonText" Text="Şehrin ikonik müzeleri ve antik sokakları..." FontSize="12" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
+                                                <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
+                                                    <TextBlock x:Name="AfternoonTransitText" Text="🚌 Otobüs / Metro ile 10 dk" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- Akşam Kartı (Gün Batımı, Akşam Yemeği Fotoğrafı & Ulaşım Tüyosu) -->
+                                    <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="74"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
+                                                <Image x:Name="EveningImage" Stretch="UniformToFill"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="AKŞAM: Gün Batımı &amp; Akşam Yemeği" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
+                                                <TextBlock x:Name="EveningText" Text="Manzara seyir noktası ve geleneksel akşam yemeği..." FontSize="12" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
+                                                <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
+                                                    <TextBlock x:Name="EveningTransitText" Text="🚶‍♂️ 12 dk sahil / sokak yürüyüşü" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
                         </ScrollViewer>
 
                         <!-- ÖZEL MODAL BUTONLARI: FOTOĞRAF TÜYOLARI, LEZZET KEŞFİ & OYUN MODU -->
