@@ -61,10 +61,10 @@ namespace IMODY
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
+            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.55);
         }
 
-        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.12)
+        private void SwitchBackgroundVideo(string videoFileName, double speedRatio = 0.55)
         {
             try
             {
@@ -178,12 +178,10 @@ namespace IMODY
             StepBadge.Text = $"ADIM {step} / 5";
             UIElement? activePanel = null;
 
-            // Çarkların döndüğü sinematik arka plan (Ultra Slow-Mo 0.12x)
-            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
-
             switch (step)
             {
                 case DateStep:
+                    SwitchBackgroundVideo("bg_ody_creating.mp4", 0.55);
                     QuestionText.Text = $"{destination} için ne zaman yola çıkıyoruz?";
                     DatePanel.Visibility = Visibility.Visible;
                     activePanel = DatePanel;
@@ -191,6 +189,7 @@ namespace IMODY
                     break;
 
                 case PeopleStep:
+                    SwitchBackgroundVideo("bg_later_steps.mp4", 0.70);
                     QuestionText.Text = "Kaç kişi seyahat edeceksiniz?";
                     PeoplePanel.Visibility = Visibility.Visible;
                     activePanel = PeoplePanel;
@@ -198,6 +197,7 @@ namespace IMODY
                     break;
 
                 case AccommodationStep:
+                    SwitchBackgroundVideo("bg_later_steps.mp4", 0.70);
                     QuestionText.Text = "Konaklama durumun nasıl?";
                     AccommodationPanel.Visibility = Visibility.Visible;
                     activePanel = AccommodationPanel;
@@ -205,6 +205,7 @@ namespace IMODY
                     break;
 
                 case InterestsStep:
+                    SwitchBackgroundVideo("bg_later_steps.mp4", 0.70);
                     QuestionText.Text = "Ody ile Rota Sohbeti";
                     InterestChatPanel.Visibility = Visibility.Visible;
                     activePanel = InterestChatPanel;
@@ -217,6 +218,7 @@ namespace IMODY
                     break;
 
                 case PlanStep:
+                    SwitchBackgroundVideo("bg_later_steps.mp4", 0.70);
                     QuestionText.Text = $"{destination} Seyahat Planın";
                     PlanDisplayPanel.Visibility = Visibility.Visible;
                     activePanel = PlanDisplayPanel;
@@ -631,7 +633,7 @@ Tam {totalDays} günlük plan hazırla.
                 allGameMode = $"{selectedPeopleCount} kişi için oyun: 'Şehir Dedektifi' - Gün boyu en ilginç sokak tabelasını ve tarihi kapı tokmağını ilk bulan kazanır!";
             }
 
-            SwitchBackgroundVideo("bg_ody_creating.mp4", 0.12);
+            SwitchBackgroundVideo("bg_later_steps.mp4", 0.70);
             BuildDayBoxes();
         }
 

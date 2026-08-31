@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
@@ -237,11 +238,14 @@ namespace IMODY
                 };
 
                 DiffuseMaterial diffuse = new DiffuseMaterial(brush);
+                // Işık saçan parlaklık katmanı (Emissive)
+                EmissiveMaterial emissive = new EmissiveMaterial(new ImageBrush(bitmap) { Opacity = 0.28 });
                 // Okyanus parlaması (Specular)
-                SpecularMaterial specular = new SpecularMaterial(new SolidColorBrush(Color.FromArgb(90, 220, 240, 255)), 40);
+                SpecularMaterial specular = new SpecularMaterial(new SolidColorBrush(Color.FromArgb(160, 240, 250, 255)), 65);
 
                 MaterialGroup group = new MaterialGroup();
                 group.Children.Add(diffuse);
+                group.Children.Add(emissive);
                 group.Children.Add(specular);
 
                 EarthGeometryModel.Material = group;
@@ -579,21 +583,28 @@ namespace IMODY
                     Data = geometry,
                     Fill = textColor,
                     Stroke = textColor,
-                    StrokeThickness = 1.0,
+                    StrokeThickness = 0.6,
                     StrokeLineJoin = PenLineJoin.Round,
                     StrokeStartLineCap = PenLineCap.Round,
                     StrokeEndLineCap = PenLineCap.Round,
                     StrokeDashArray = new DoubleCollection { 1 },
                     StrokeDashOffset = 1,
                     RenderTransform = new TranslateTransform(currentX, 0),
-                    Opacity = 1
+                    Opacity = 1,
+                    Effect = new DropShadowEffect
+                    {
+                        Color = Colors.Black,
+                        BlurRadius = 16,
+                        ShadowDepth = 3,
+                        Opacity = 0.70
+                    }
                 };
 
                 WelcomeAnimationCanvas.Children.Add(path);
                 AnimatePath(path);
 
                 currentX += formattedText.Width + LetterSpacing;
-                await Task.Delay(80);
+                await Task.Delay(60);
             }
         }
 
@@ -609,7 +620,7 @@ namespace IMODY
             {
                 From = length,
                 To = 0,
-                Duration = TimeSpan.FromMilliseconds(650),
+                Duration = TimeSpan.FromMilliseconds(550),
                 FillBehavior = FillBehavior.HoldEnd,
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
@@ -658,7 +669,7 @@ namespace IMODY
                 FontStretches.Normal);
 
             double pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
-            return new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, LetterFontSize, new SolidColorBrush(Color.FromRgb(180, 22, 69)), pixelsPerDip);
+            return new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, LetterFontSize, (Brush)Application.Current.Resources["Theme_Accent"] ?? new SolidColorBrush(Color.FromRgb(214, 164, 90)), pixelsPerDip);
         }
 
         // =========================================================
