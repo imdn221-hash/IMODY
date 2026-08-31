@@ -546,7 +546,7 @@ Lütfen aşağıdaki JSON formatında geçerli bir yanıt dön. Sadece ve sadece
       ""EveningTransit"": ""🚶‍♂️ 12 dk sahil / sokak yürüyüşü""
     }}
   ],
-  ""PhotoTips"": ""Bu rota için en iyi altın ışık saatleri (Golden Hour), gizli fotoğraf açıları ve çekim tüyoları..."",
+  ""PhotoTips"": ""{destination}'da gidilecek her bir lokasyon için AYRI AYRI detaylandırılmış fotoğraf & poz rehberi:\\n\\n📍 1. [1. Mekan/Meydan Adı]:\\n🌅 Sabah Işığı & Poz (07:30 - 10:00): Sabah yumuşak ışığında tam nerede durulmalı, hangi açıdan ve nasıl bir poz verilmeli (Örn: Çeşmenin sol basamaklarında yürürken, 45 derece açıdan, geniş kadraj).\\n🌇 Akşam & Gün Batımı Pozu (18:00 - 20:30): Altın saatlerde (Golden Hour) ve gece ışıklandırmasında nerede durulmalı, fener ışığını arkaya alıp nasıl estetik bir siluet/portre pozu verilmeli.\\n\\n📍 2. [2. Mekan Adı]:\\n🌅 Sabah Pozu: ...\\n🌇 Akşam Pozu: ...\\n\\n📍 3. [3. Mekan Adı]:\\n🌅 Sabah Pozu: ...\\n🌇 Akşam Pozu: ..."",
   ""FoodDiscovery"": ""{destination}'da gezerken ayaküstü tadılması gereken 4-5 meşhur yöresel sokak lezzeti, tatlısı ve en popüler fırın/bistro önerileri..."",
   ""GameMode"": ""{selectedPeopleCount} kişilik grup için günün sonunda veya kafede oynanabilecek eğlenceli seyahat/dedektiflik oyunu...""
 }}
@@ -628,7 +628,17 @@ Tam {totalDays} günlük plan hazırla.
                         EveningTransit = "🚶‍♂️ 12 dk yürüyüş mesafesinde"
                     });
                 }
-                allPhotoTips = $"{destination} için en iyi ışık saatleri 18:00 - 19:30 arasıdır. Tarihi kemerlerin altından geniş açı pozlar çekebilirsiniz.";
+                allPhotoTips = $@"📍 1. {destination} Tarihi Merkez & Ana Meydan:
+🌅 Sabah Işığı & Poz (08:00 - 10:00): Sabah kalabalığı başlamadan önce meydanın tarihi kemerlerinin altından geniş açılı yürüyüş pozu verin; sabah güneşi sütunların arasından büyüleyici bir derinlik katar.
+🌇 Akşam/Gece Pozu (18:30 - 20:30): Altın saatlerde meydandaki anıtı arkanıza alarak 45 derece yan profilden, elinizde kahve/dondurma ile doğal bir sokak pozu yakalayın.
+
+📍 2. Panoramik Seyir Terası / Baş Katedral:
+🌅 Sabah Işığı & Poz (08:30 - 10:30): Şehre tepeden bakan terasta korkuluklara yaslanıp uzak ufka bakış pozu; sabah sisiyle şehir manzarası mükemmel bir arka plan oluşturur.
+🌇 Akşam/Gece Pozu (18:00 - 20:00): Gün batımı gökyüzü pembe-turuncu tonlara büründüğünde siluet pozu veya katedralin gece aydınlatması altında hafif yukarıdan açılı portre pozu.
+
+📍 3. Tarihi Arnavut Kaldırımlı Sokaklar & Butik Kafeler:
+🌅 Sabah Işığı & Poz: Renkli panjurlu binaların arasında adım atarken hareketli (motion) enstantane pozu.
+🌇 Akşam/Gece Pozu: Sıcak fener ışıkları yandığında kafe masasında otururken taze içecekle gülümseyen samimi bir portre pozu.";
                 allFoodDiscovery = $"{destination} Sokak Lezzetleri: Sıcak fırın pizzası, el yapımı taze dondurma (gelato), maritozzo ve çıtır sokak atıştırmalıkları!";
                 allGameMode = $"{selectedPeopleCount} kişi için oyun: 'Şehir Dedektifi' - Gün boyu en ilginç sokak tabelasını ve tarihi kapı tokmağını ilk bulan kazanır!";
             }

@@ -578,10 +578,10 @@
             </Button>
         </Grid>
         <!-- ========================================================= -->
-        <!-- FOTOĞRAF TÜYOLARI MODALI -->
+        <!-- FOTOĞRAF TÜYOLARI MODALI (MEKAN BAZLI & SABAH/AKŞAM POZLARI) -->
         <!-- ========================================================= -->
         <Grid x:Name="PhotoTipsModal" Grid.RowSpan="3" Visibility="Collapsed" Background="#C8000000">
-            <Border Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1.5" CornerRadius="18" Padding="22" Width="600" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1.5" CornerRadius="18" Padding="24" Width="680" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -592,13 +592,13 @@
                     <StackPanel Grid.Row="0" Margin="0,0,0,14">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="📸 " FontSize="22" VerticalAlignment="Center"/>
-                            <TextBlock Text="Fotoğraf Tüyoları &amp; Altın Işık Saatleri" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource Theme_TextPrimary}"/>
+                            <TextBlock Text="Mekan Bazlı Fotoğraf &amp; Poz Rehberi" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource Theme_TextPrimary}"/>
                         </StackPanel>
-                        <TextBlock Text="Ody'den o şehre ve günün manzaralarına özel en iyi çekim önerileri:" FontSize="11.5" Foreground="{DynamicResource Theme_TextSecondary}" Margin="0,3,0,0"/>
+                        <TextBlock Text="Ody'den gidilecek her nokta için ayrı ayrı sabah ve akşam/gece poz &amp; ışık tüyoları:" FontSize="11.5" Foreground="{DynamicResource Theme_TextSecondary}" Margin="0,3,0,0"/>
                     </StackPanel>
 
-                    <ScrollViewer Grid.Row="1" MaxHeight="260" VerticalScrollBarVisibility="Auto" Margin="0,0,0,16">
-                        <TextBlock x:Name="PhotoTipsModalText" Text="Fotoğraf tüyoları yükleniyor..." FontSize="12.5" LineHeight="19" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap"/>
+                    <ScrollViewer Grid.Row="1" MaxHeight="360" VerticalScrollBarVisibility="Auto" Margin="0,0,0,16">
+                        <TextBlock x:Name="PhotoTipsModalText" Text="Fotoğraf tüyoları yükleniyor..." FontSize="12.5" LineHeight="20" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap"/>
                     </ScrollViewer>
 
                     <Button Grid.Row="2" Content="Kapat" Width="100" Height="34" HorizontalAlignment="Right" Background="{DynamicResource Theme_Accent}" Foreground="#2B0717" FontWeight="Bold" Cursor="Hand" Click="ClosePhotoTips_Click">
