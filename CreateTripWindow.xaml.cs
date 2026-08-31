@@ -538,7 +538,7 @@ Lütfen aşağıdaki JSON formatında geçerli bir yanıt dön. Sadece ve sadece
     {{
       ""DayNumber"": 1,
       ""DayTitle"": ""1. Gün: Tarihin Kalbine Yolculuk"",
-      ""MorningBreakfast"": ""Tarihi bir kafede kahvaltı, taze kahve ve kruvasan lezzeti..."",
+      ""MorningBreakfast"": ""📍 1. Kolezyum & Antik Meydanlar | 📍 2. Trevi Çeşmesi | 📍 3. Panteon & Tarihi Sokaklar (Günün mutlaka görülmesi gereken 3-4 ana cazibe merkezi)"",
       ""MorningTransit"": ""🚶‍♂️ 8 dk yürüyüş mesafesinde"",
       ""AfternoonActivity"": ""Öğleden sonra keşfedilecek antik sokaklar, müze ve mitolojik hikaye..."",
       ""AfternoonTransit"": ""🚌 Otobüs / Metro ile 10 dk (2 durak)"",
@@ -620,7 +620,7 @@ Tam {totalDays} günlük plan hazırla.
                     {
                         DayNumber = i,
                         DayTitle = $"{i}. Gün: {destination} Keşfi",
-                        MorningBreakfast = $"{destination} merkezindeki tarihi bir kafede taze espresso ve kruvasanla güne başla.",
+                        MorningBreakfast = $"📍 1. {destination} Tarihi Merkez & İkonik Meydanlar | 📍 2. Şehrin Baş Katedrali & Seyir Terası | 📍 3. Tarihi Çarşı & Sokaklar",
                         MorningTransit = "🚶‍♂️ 6 dk yürüyüş mesafesinde",
                         AfternoonActivity = $"{destination}'nın en popüler tarihi meydanlarını, müzelerini ve sokak lezzetlerini keşfet.",
                         AfternoonTransit = "🚌 64 no'lu otobüs ile 10 dk",

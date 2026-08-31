@@ -410,7 +410,7 @@
                         <!-- SEÇİLEN GÜNÜN ZENGİN İÇERİĞİ (SABAH, ÖĞLE, AKŞAM KARTLARI) -->
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
                             <StackPanel x:Name="DayDetailCardsPanel">
-                                <!-- Sabah Kartı (Pinterest Kahvaltı Fotoğrafı ve Ulaşım Tüyosu) -->
+                                <!-- 1. Kart: Gidilecek Yerler & Günün Rota Listesi -->
                                 <Border Background="{DynamicResource Theme_BgSub}" BorderBrush="{DynamicResource Theme_Border}" BorderThickness="1" CornerRadius="14" Padding="14,12" Margin="0,0,0,8">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -418,14 +418,14 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         
-                                        <!-- Pinterest Kahvaltı Fotoğrafı -->
+                                        <!-- Rota / Keşif Fotoğrafı -->
                                         <Border Grid.Column="0" Width="68" Height="68" CornerRadius="12" ClipToBounds="True" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1">
                                             <Image x:Name="MorningBreakfastImage" Stretch="UniformToFill"/>
                                         </Border>
                                         
                                         <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                                            <TextBlock Text="SABAH: Kahvaltı &amp; Güne Başlangıç" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
-                                            <TextBlock x:Name="MorningText" Text="Tarihi kafede taze kahve ve yerel fırın lezzetleri..." FontSize="12" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
+                                            <TextBlock Text="📍 GÜNÜN ROTASI &amp; GİDİLECEK YERLER LİSTESİ" FontWeight="Bold" FontSize="13" Foreground="{DynamicResource Theme_Accent}"/>
+                                            <TextBlock x:Name="MorningText" Text="Şehrin görülmesi gereken en popüler noktaları ve ikonik mekanları..." FontSize="12" LineHeight="18" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap" Margin="0,3,0,4"/>
                                             <Border Background="{DynamicResource Theme_BgCard}" CornerRadius="8" Padding="8,3" HorizontalAlignment="Left">
                                                 <TextBlock x:Name="MorningTransitText" Text="🚶‍♂️ Yürüme mesafesinde" FontSize="11" Foreground="{DynamicResource Theme_Accent}"/>
                                             </Border>
