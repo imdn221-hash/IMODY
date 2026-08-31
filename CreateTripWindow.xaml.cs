@@ -358,7 +358,7 @@ namespace IMODY
         }
 
         private void OpenTrivago_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl($"https://www.trivago.com.tr/tr/srl?search={Uri.EscapeDataString(destination)}");
-        private void OpenEts_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl($"https://www.etstur.com/Arama?search={Uri.EscapeDataString(destination)}");
+        private void OpenEts_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl(string.IsNullOrWhiteSpace(destination) ? "https://www.etstur.com/" : $"https://www.google.com/search?q=etstur+{Uri.EscapeDataString(destination)}+otelleri");
         private void OpenBooking_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl($"https://www.booking.com/searchresults.tr.html?ss={Uri.EscapeDataString(destination)}");
         private void OpenAirbnb_Click(object sender, RoutedEventArgs e) => OpenBrowserUrl($"https://www.airbnb.com.tr/s/{Uri.EscapeDataString(destination)}/homes");
 
