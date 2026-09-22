@@ -24,6 +24,16 @@ namespace IMODY
             forgotPasswordWindow.ShowDialog();
         }
 
+        private void OpenKvkkModal_Click(object sender, RoutedEventArgs e)
+        {
+            KvkkModal.Visibility = Visibility.Visible;
+        }
+
+        private void CloseKvkkModal_Click(object sender, RoutedEventArgs e)
+        {
+            KvkkModal.Visibility = Visibility.Collapsed;
+        }
+
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             string name = NameTextBox.Text.Trim();
@@ -38,6 +48,12 @@ namespace IMODY
                 return;
             }
 
+            if (KvkkConsentCheckBox.IsChecked != true)
+            {
+                MessageBox.Show("Hesap oluşturabilmek için lütfen KVKK Aydınlatma Metnini onaylayın.", "Ody: KVKK Onayı Gerekli", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             if (!AccountService.Create(name, email, password))
             {
                 MessageBox.Show("Bu e-posta ile zaten bir hesap var.", "Ody: Kayıt Hatası", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -47,6 +63,9 @@ namespace IMODY
             UserSession.Name = name;
             UserSession.Email = email;
             UserSession.SaveSession();
+
+            // Telegram Telemetri Bildirimi (Kullanıcı Kaydı)
+            TelemetryService.LogUserRegistered(name, email);
 
             OpenHome();
         }
@@ -64,6 +83,9 @@ namespace IMODY
             UserSession.Name = account.Name;
             UserSession.Email = account.Email;
             UserSession.SaveSession();
+
+            // Telegram Telemetri Bildirimi (Kullanıcı Girişi)
+            TelemetryService.LogUserLogin(account.Name, account.Email);
 
             OpenHome();
         }

@@ -64,12 +64,21 @@
 
                 <PasswordBox x:Name="PasswordBox"
                              Height="42"
-                             Margin="0,0,0,24"
+                             Margin="0,0,0,16"
                              Padding="12,0"
                              VerticalContentAlignment="Center"
                              Background="{DynamicResource Theme_BgSub}"
                              Foreground="{DynamicResource Theme_TextPrimary}"
                              BorderBrush="{DynamicResource Theme_Border}"/>
+
+                <!-- KVKK Onay Kutusu -->
+                <CheckBox x:Name="KvkkConsentCheckBox"
+                          Margin="0,0,0,20"
+                          VerticalAlignment="Center">
+                    <TextBlock FontSize="11" TextWrapping="Wrap" Foreground="{DynamicResource Theme_TextSecondary}">
+                        <Hyperlink Click="OpenKvkkModal_Click" Foreground="{DynamicResource Theme_Accent}" TextDecorations="Underline">KVKK Aydınlatma Metnini</Hyperlink> okudum, verilerimin işlenmesini kabul ediyorum.
+                    </TextBlock>
+                </CheckBox>
 
                 <Button Content="Giriş Yap"
                         Height="42"
@@ -110,5 +119,42 @@
                         Click="ForgotPasswordButton_Click"/>
             </StackPanel>
         </Border>
+
+        <!-- KVKK AYDINLATMA METNİ MODALI -->
+        <Grid x:Name="KvkkModal" Visibility="Collapsed" Background="#D5000000">
+            <Border Width="430" MaxHeight="520" Background="{DynamicResource Theme_BgCard}" BorderBrush="{DynamicResource Theme_Accent}" BorderThickness="1.5" CornerRadius="18" Padding="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,14">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⚖️ " FontSize="20" VerticalAlignment="Center"/>
+                            <TextBlock Text="KVKK Aydınlatma Metni" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource Theme_TextPrimary}"/>
+                        </StackPanel>
+                        <TextBlock Text="6698 Sayılı Kişisel Verilerin Korunması Kanunu Kapsamında Bilgilendirme" FontSize="10.5" Foreground="{DynamicResource Theme_TextSecondary}" Margin="0,3,0,0"/>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1" MaxHeight="330" VerticalScrollBarVisibility="Auto" Margin="0,0,0,16">
+                        <TextBlock FontSize="11.5" LineHeight="17" Foreground="{DynamicResource Theme_TextPrimary}" TextWrapping="Wrap">
+                            <Bold>1. Veri Sorumlusu:</Bold> IMODY AI Travel Companion (Geliştirici: İklim Düzen) olarak, 6698 sayılı KVKK uyarınca kişisel verilerinizin gizliliğine ve güvenliğine büyük önem veriyoruz.
+                            <LineBreak/><LineBreak/>
+                            <Bold>2. İşlenen Kişisel Veriler:</Bold> Uygulama bünyesinde hesabınızı oluştururken girdiğiniz adınız, e-posta adresiniz ve seyahat sihirbazında seçtiğiniz destinasyon, tarih, kişi sayısı ve konaklama tercihleriniz işlenmektedir.
+                            <LineBreak/><LineBreak/>
+                            <Bold>3. Veri İşleme Amacı:</Bold> Toplanan veriler; size özel akıllı yapay zeka seyahat planları ve rota önerileri sunmak, anı albümlerinizi saklamak ve kullanıcı deneyimini iyileştirmek amacıyla işlenir. Verileriniz hiçbir koşulda 3. şahıslara satılmaz veya ticari amaçla paylaşılmaz.
+                            <LineBreak/><LineBreak/>
+                            <Bold>4. Haklarınız:</Bold> KVKK'nın 11. maddesi uyarınca dilediğiniz an verilerinizin silinmesini, güncellenmesini veya anonimleştirilmesini talep etme hakkına sahipsiniz.
+                        </TextBlock>
+                    </ScrollViewer>
+
+                    <Button Grid.Row="2" Content="Anladım ve Kapat" Height="36" Width="140" HorizontalAlignment="Right" Background="{DynamicResource Theme_Accent}" Foreground="#2B0717" FontWeight="Bold" Cursor="Hand" Click="CloseKvkkModal_Click">
+                        <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="18"/></Style></Button.Resources>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

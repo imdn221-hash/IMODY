@@ -556,6 +556,9 @@ Tam {totalDays} günlük plan hazırla.
                 var gemini = new GeminiService();
                 string rawJson = await gemini.GenerateAsync(prompt);
                 ParseAndDisplayPlan(rawJson, totalDays);
+
+                // Telegram Telemetri Bildirimi (Yeni Rota Planı Oluşturuldu)
+                TelemetryService.LogTripCreated(destination, totalDays, selectedPeopleCount, finalAcc);
             }
             catch (Exception ex)
             {
